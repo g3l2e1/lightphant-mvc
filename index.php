@@ -1,18 +1,17 @@
 <?php
-
 header('Content-Type: text/html; charset=UTF-8', true);
 
-//Caminhos dos arquivos
-//require_once( 'lib/config/defines.php' );
+//Constantes do usuário - define();
+require_once( 'lib/config/constants.php' );
 
-//Definicões do usuário.
-//require_once( 'lib/config/Definicoes.php' );
+//Estrutura das pastas
+require_once( 'lib/config/FolderStructure.php' );
 
 //Autoload
-//require_once( LF_SYSTEM . 'AutoLoad.php' );
+require_once( 'lib/bin/AutoLoad.php' );
 
 //Funções extras para o php.
-//require_once( LF_HELPERS . 'php_extends.php' );
+require_once( 'lib/helpers/php_extends.php' );
 
 //Criar Sessão Inicial gravando banco.
 $sessao = new Session();
