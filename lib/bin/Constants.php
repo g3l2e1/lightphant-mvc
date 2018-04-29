@@ -26,21 +26,6 @@ class Constants {
     const LP_DEBUG = true;
 
     /**
-     * Caminho para diretório raiz
-     */
-    const DIR_BASE = $_SERVER['DOCUMENT_ROOT'];
-
-    /**
-     * Caminho para pasta lib do sistema.
-     */
-    const LIB = 'lib/';
-
-    /**
-     * Caminho para pasta com arquivos de configuração do sistema.
-     */
-    const CONFIG = 'lib/config/';
-
-    /**
      * Caminho para pasta app do sistema.
      */
     const APP = 'app/';
