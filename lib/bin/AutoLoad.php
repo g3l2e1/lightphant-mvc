@@ -7,9 +7,9 @@
 class AutoLoad {
 
     public function __construct($classe) {
-
-        $folders = ESTRUTURA;
-
+        
+    try{
+        $estrutura = ESTRUTURA;
         $requireFile = null;
 
         for ($i = 0; $i < count($estrutura); $i++) {
@@ -19,7 +19,9 @@ class AutoLoad {
         }
 
         if ($requireFile == null) {
-            print "
+
+            throw new Exception("A classe <b><i>{$classe}</i></b> instânciada não foi encontrada pelo autoload"); die();
+            /*print "
                 <style>
                     body { background-color: DodgerBlue; }
                     section {
@@ -42,10 +44,17 @@ class AutoLoad {
                     <br/>
                     <a href='/'>Voltar para pagina Inicial.</a>
                 </section>
-            ";die();
+            ";die();*/
         } else {
             require_once( $requireFile );
         }
+
+    }catch($t){
+        
     }
 
+}
+
+function __autoload($classe){
+    $autoload = new Autoload($classe);
 }

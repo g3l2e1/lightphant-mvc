@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset=UTF-8', true);
 require_once( 'lib/bin/Constants.php' );
 
 //Estrutura das pastas
-require_once( 'lib/bin/Config.php' );
+require_once( 'lib/config/Config.php' );
 
 //Autoload
 require_once( 'lib/bin/AutoLoad.php' );

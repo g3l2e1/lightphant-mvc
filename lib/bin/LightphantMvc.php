@@ -11,7 +11,22 @@
  *
  * @author gleyson
  */
-class LightphantMvc {
+final class LightphantMvc {
    
-    
+    private $url;
+    private $cache;
+    private $controller='IndexController';
+    private $action='inicial';
+    private $params;
+
+    public function __construct(){
+
+    }
+
+    public function trumpet(){
+
+        //Executar a classe controller e método
+        $mvc = new $this->controller();
+        $mvc->$this->action();
+    }
 }
