@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Arquivo de definições usadas no LightPhantMvc.
+ * Classe com as definições usadas no LightPhantMvc.
  * ************************************************************************** */
 /*
  * Para começar a usar o framework na mesma estrutura que é baixado é necessário 
@@ -13,134 +13,134 @@
  * modificar para o caminho correto cada define abaixo.
  * 
  * ************************************************************************** */
+class Constants {
 
+    /**
+     * Caminho base da url
+     */
+    const URL_BASE = "/";
 
-/**
- * Caminho base do site.
- * 
- * Usado em caso de desenvolvimento com <b>wamp</b> ou <b>xampp</b> 
- * quando o site está compartilhando o espaço da pasta www com vários 
- * outros sites em desenvolvimento.
- * 
- * Caso esteja hospedado a base deve estar definida como "".
- */
-$host = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+    /**
+     * Ativa modo de deupração desenvolvedor se TRUE;
+     */
+    const LP_DEBUG = true;
 
+    /**
+     * Caminho para diretório raiz
+     */
+    const DIR_BASE = $_SERVER['DOCUMENT_ROOT'];
 
+    /**
+     * Caminho para pasta lib do sistema.
+     */
+    const LIB = 'lib/';
 
+    /**
+     * Caminho para pasta com arquivos de configuração do sistema.
+     */
+    const CONFIG = 'lib/config/';
 
-/**
- * Caminho inicial da página. "/" para págins com aliás.
- */
-define('URL_BASE', "/");
+    /**
+     * Caminho para pasta app do sistema.
+     */
+    const APP = 'app/';
 
-/**
- * Caminho para socket.
- */
-define('DIR_SOCKET', str_replace(array('//'), array('/'), "{$_SERVER['DOCUMENT_ROOT']}/lib/sockets/"));
+    /**
+     * Caminho para pasta com controllers do sistema.
+     */
+    const CONTROLLER = APP.'controllers/';
 
-/**
- * Caminho para anexos.
- */
-define('DIR_ANEXO', "/media/intrasul/www/layouts/");
+    /**
+     * Caminho para pasta com dtos do sistema.
+     */
+    const DTOS = APP.'dtos/';
 
-/**
- * Acesso via URL ao diretório de anexos.
- */
-define('URL_ANEXO', "//intrasul/layouts/");
+    /**
+     * Caminho para pasta com dtos do sistema.
+     */
+    const ENUMS = APP.'enums/';
 
-/**
- * Ativa modo de deupração desenvolvedor se TRUE;
- */
-define('LF_DEBUG',TRUE);
+    /**
+     * Caminho para pasta com filters do sistema.
+     */
+    const FILTERS = APP.'filters/';
 
-/**
- * Caminho para diretório raiz
- */define('DIR_BASE', $_SERVER['DOCUMENT_ROOT']);
+    /**
+     * Caminho para pasta com helpers do sistema.
+     */
+    const HELPERS = APP.'helpers/';
 
-/**
- * Caminho para pasta com arquivos de configuração do sistema.
- */
-define('CONFIG', 'lib/config/');
+    /**
+     * Caminho para pasta com models do sistema.
+     */
+    const MODELS = APP.'models/';
 
-/**
- * Caminho para pasta lib do sistema.
- */
-define('LIB', 'lib/');
+    /**
+     * Caminho para pasta com dtos do sistema.
+     */
+    const RENDERERS = APP.'renderers/';
 
-/**
- * Caminho para pasta app do sistema.
- */
-define('APP', 'app/');
+    /**
+     * Caminho para pasta com dtos do sistema.
+     */
+    const SERVICES = APP.'services/';
 
-/**
- * Caminho para pasta com controllers do sistema.
- */
-define('LF_CONTROLLERS', LIB . 'controllers/');
+    /**
+     * Caminho para pasta com dtos do sistema.
+     */
+    const VIEWS = APP.'views/';
 
-/**
- * Caminho para pasta com models do sistema.
- */
-define('LF_MODELS', LIB . 'models/');
+    /**
+     * Caminho para pasta com dtos do sistema.
+     */
+    const VIEWS_PLUGINS = VIEWS.'plugins/';
 
-/**
- * Caminho para pasta com arquivos de sistema.
- */
-define('LF_SYSTEM', LIB . 'system/');
+    /**
+     * Caminho para pasta com arquivos do sistema.
+     */
+    const LIB = 'lib/';
 
-/**
- * Caminho para pasta com helpers do sistema.
- */
-define('LF_HELPERS', LIB . 'helpers/');
+    /**
+     * Caminho para pasta com bin do sistema.
+     */
+    const LP_BIN = LIB.'bin/';
 
-/**
- * Caminho para pasta com helpers do sistema.
- */
-define('LF_SOCKETS', LIB . 'sockets/');
+    /**
+     * Caminho para pasta com config do sistema.
+     */
+    const LP_CONFIG = LIB.'config/';
 
-/**
- * Caminho para pasta com as views do sistema.
- */
-define('LF_VIEWS', LIB . 'views/');
+    /**
+     * Caminho para pasta com helpers do sistema.
+     */
+    const LP_HELPERS = LIB.'helpers/';
 
-/**
- * Caminho para pasta com as classes de erro do sistema.
- */
-define('LF_ERRORS', LIB . 'views/errors/');
+    /**
+     * Caminho para pasta com bin do sistema.
+     */
+    const DIR_SOCKETS = LP_HELPERS.'fakesockets/';
 
-/**
- * Caminho para pasta com as webfiles de erro.
- */
-define('EXAMPLE', LIB . 'example/');
+    /**
+     * Estrutura do sistema padrão
+     */
+    const ESTRUTURA = [
+        "/",
+        "app/",
+        "app/controllers/",
+        "app/dtos/",
+        "app/enums/",
+        "app/filters/",
+        "app/helpers/",
+        "app/models/",
+        "app/renderers/",
+        "app/services/",
+        "app/views/",
+        "lib/",
+        "lib/bin/",
+        "lib/config/",
+        "lib/helpers/",
+        "lib/helpers/fakesockets/",
+        "lib/helpers/kint/"
+    ];
 
-/**
- * Caminho para pasta com as views da aplicação.
- */
-define('MODELS', APP . 'models/');
-
-/**
- * Caminho para pasta com as views da aplicação.
- */
-define('VIEWS', APP . 'views/');
-
-/**
- * Caminho para pasta com os controllers da aplicação.
- */
-define('CONTROLLERS', APP . 'controllers/');
-
-/**
- * Caminho para pasta com os helpers da aplicação.
- */
-define('HELPERS', APP . 'helpers/');
-
-/**
- * Caminho para pasta com os plugins da aplicação.
- */
-define('PLUGINS', VIEWS . 'plugins/');
-
-
-define('GPVendas', 'GPVendas_Desenvolvimento');
-
-
-
-?>
+}

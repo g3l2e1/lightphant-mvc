@@ -6,11 +6,9 @@ class Session {
         try {
             session_start();
             $idUser = session_id();
-        } catch (Exception $e) {
-            print "Erro: " . $e->getMessage();
+        } catch (Exception $t) {
+            print "Erro: " . $t->getMessage(); die();
         }
     }
 
 }
-
-?>

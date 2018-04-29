@@ -1,11 +1,12 @@
 <?php
+
 header('Content-Type: text/html; charset=UTF-8', true);
 
 //Constantes do usuário - define();
-require_once( 'lib/config/constants.php' );
+require_once( 'lib/bin/Constants.php' );
 
 //Estrutura das pastas
-require_once( 'lib/config/FolderStructure.php' );
+require_once( 'lib/bin/Config.php' );
 
 //Autoload
 require_once( 'lib/bin/AutoLoad.php' );
@@ -19,7 +20,3 @@ $sessao = new Session();
 //Iniciar Lightphant MVC
 $mvc = new LightphantMvc();
 $mvc->trumpet();
-
-
-
-?>

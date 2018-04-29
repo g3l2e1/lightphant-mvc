@@ -8,8 +8,7 @@ class AutoLoad {
 
     public function __construct($classe) {
 
-        $folders = new FolderStructure();
-        $estrutura = $folders->getPastas();
+        $folders = ESTRUTURA;
 
         $requireFile = null;
 
