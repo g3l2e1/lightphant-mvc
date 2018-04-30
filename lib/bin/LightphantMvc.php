@@ -11,13 +11,13 @@
  *
  * @author gleyson
  */
-final class LightphantMvc {
+class LightphantMvc {
    
-    private $url;
-    private $cache;
-    private $controller='IndexController';
-    private $action='inicial';
-    private $params;
+    protected $url;
+    protected $cache;
+    protected $controller='IndexController';
+    protected $action='initial';
+    protected $params;
 
     public function __construct(){
 
@@ -25,8 +25,11 @@ final class LightphantMvc {
 
     public function trumpet(){
 
+    	$Controller = $this->controller;
+    	$action = $this->action;
+    	
         //Executar a classe controller e método
-        $mvc = new $this->controller();
-        $mvc->$this->action();
+        $mvc = new $Controller();
+        $mvc->$action();
     }
 }

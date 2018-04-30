@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+
+<html lang="pt-br">
+<head>   
+	<meta charset="UTF-8">
+	<meta name="author" content="Gleyson Barroso">   
+	<link rel="shortcut icon" type="image/x-icon" href="<?= URL_BASE.VIEWS; ?>img/favicon.ico" />
+	<link rel="icon" type="image/x-png" href="<?= URL_BASE.VIEWS; ?>img/favicon.png" />
+	
+	<link rel="stylesheet" type="text/css" href="<?= URL_BASE.PLUGINS; ?>light-frontend-0.5/light-frontend.css"/>  
+	<link rel="stylesheet" type="text/css" href="<?= URL_BASE.PLUGINS; ?>light-table.css" media="screen"/> 
+	<link rel="stylesheet" type="text/css" href="<?= URL_BASE.PLUGINS; ?>font-awesome-4.6.3/css/font-awesome.css"/> 
+	<link rel="stylesheet" type="text/css" href="<?= URL_BASE.PLUGINS; ?>gb-webfont.css"/>
+</head>
+
+<?php 
+	$query = Conexao::$con->query ?? false; 
+	$showQuery = $query ? "" : "lt-none";
+	$colorTheme = $query ? "#BE8CC8" : "tomato";
+	$iconException = $query ? "fa fa-database" : "fa fa-code";
+?>
+
+<style>
+	
+	/*******************************************************************************
+	 * GERAL
+	 ******************************************************************************/
+	@font-face { font-family:'Rokkitt'; font-style: normal; 
+		src: url('<?= URL_BASE.VIEWS; ?>fonts/Rokkitt-Regular.ttf') format("truetype");	}
+		
+	html { width: 100%; height: 100%; padding: 0px; margin: 0px; }
+	body{ 
+		width: 100%; height: 100%; padding: 0px; margin: 0px; 
+		font-family:"Rokkitt", monospace; font-size: 1.1em; 
+		overflow: auto; display: flex; flex-direction: column;
+		background-color: #efefef; padding-bottom: 400px; max-width: 940px;
+	}
+	
+	
+	/*******************************************************************************
+	 * TITLE
+	 ******************************************************************************/
+	header.error-title { 
+		height: 120px; width: 100%; flex: 1; display: flex;
+		background-color: #242426; color: #ddd;
+		position: absolute; z-index: 100; top: 0; left: 0;
+	}
+		.error-title-inner{
+			margin: 2em; flex: 1;
+		}
+		.error-title-inner h1 { margin: 0px 0px 0.2em 0px; padding: 0px; }
+		.error-title-inner span { color: <?= $colorTheme ?>; }
+	
+	
+	/*******************************************************************************
+	 * EXCEPTION
+	 ******************************************************************************/
+	h3 { margin: 1em 0px 0.2em 1.7em; color: #555; }
+	h3 i { margin-right: 0.3em; }
+	section.error-exception {
+		margin: 0.3em 0px 0.5em 2em; color: #ccc; background-color: #242426;
+		padding: 1em; box-shadow: 0 0 7px 2px rgba(0,0,0,.2); border-radius: 4px;
+	}
+		.error-exception-description{
+			
+		}
+		.error-exception-description span { color: <?= $colorTheme ?>; }
+		.error-exception-message{
+			margin-top: 0.2em; color: #BCD42A;  
+		}
+	
+	
+	/*******************************************************************************
+	 * TRACE ROUTE
+	 ******************************************************************************/
+	 section.error-trace {
+	 	margin: 0.3em 0px 0.3em 2em;
+	 }
+	 	.tbl-error-trace { 
+	 		text-align: left; min-width: 600px; font-size: 16px; border-collapse: collapse; 
+	 		box-shadow: 0 0 7px 2px rgba(0,0,0,.2); width: 100%;
+ 		}
+ 		.tbl-error-trace tr { border-bottom: solid 1px #999; }
+ 		.tbl-error-trace tr:first-of-type th:first-of-type { border-radius: 4px 0px 0px 0px; }
+ 		.tbl-error-trace tr:first-of-type th:last-of-type { border-radius: 0px 0px 0px 4px; }
+ 		.tbl-error-trace tr:last-of-type { border: none; }
+	 	.tbl-error-trace tr th, .tbl-error-trace tr td { padding: 0.45em 0.55em; }
+	 	.tbl-error-trace tr th {
+	 		background-color: #BCD42A; padding: 0.45em 0.55em; 
+	 	}
+	 	.tbl-error-trace tr td { 
+	 		background-color: #242426; border-top: solid 1px #ccc; color: #bbb; 
+ 		}
+	 	.tbl-error-trace tr td:first-of-type { color: #BCD42A; }
+	 
+	 	
+ 	/*******************************************************************************
+	 * ASIND CONTROLLER
+	 ******************************************************************************/
+	 .error-query { 
+	 	margin: 0px 0px 0.3em 2em; background-color: #242426; 
+	 	box-shadow: 0 0 7px 2px rgba(0,0,0,.2); border-radius: 4px; 
+ 	 }
+	 .error-query pre { 
+	 	margin: 1em; background-color: transparent !important; font-size: 14px !important;
+ 	 }
+	 
+	 
+	 
+	 /*******************************************************************************
+	 * ASIND CONTROLLER
+	 ******************************************************************************/
+	 .error-controller {
+	 	margin: 0px 0px 350px 2em; max-width: 940px; border-collapse: collapse;
+	 }
+	 .error-controller tr td { border: solid 1px #ccc !important; }
+	 .error-controller tr td { padding: 0.35em 0.55em; }
+	 .error-controller tr td.info { color: <?= $colorTheme ?>; font-weight: bold;}
+	 .error-controller tr td.url { color: #5bc0de; }
+	 
+	 
+	/*******************************************************************************
+	 * XDEBUG
+	 ******************************************************************************/
+	table.xdebug-error { 
+		border: none; box-shadow: 0 0 7px 2px rgba(0,0,0,.2); width: 905px;
+	}
+	.xdebug-error:first-of-type {
+		margin-top: 120px !important; border-radius: 4px !important; 
+	}
+	
+	.xdebug-error {
+		 color: darkred !important;
+		 margin: 5px 10px 5px 2em !important;
+		 font-size: 16px; 
+		 font-family: Rokkitt, monospace !important;
+	}
+	
+	.xdebug-error th {
+		 background-color: <?= $colorTheme ?>; 
+	}
+	.xdebug-error tr:first-of-type th:first-of-type { 
+		background-color: darkred; color: <?= $colorTheme ?>; 
+		border-radius: 4px 4px 0px 0px !important; 
+	}
+	.xdebug-error tr:first-of-type th:first-of-type span:first-of-type { 
+		padding: 0.1em 0.25em; margin-right: 0.4em;
+	}
+	.xdebug-error th, td { border: none !important; padding: 0.35em 0.5em; text-align: left; } 
+	.xdebug-error td { background-color: #fff; border-bottom: solid 1px #ccc !important;  }
+	.xdebug-error tr:last-of-type td { 
+		border-radius: 0px 0px 4px 4px !important; 
+	}
+	
+</style>
+	 
+<body>
+	
+	<div style="margin-top:140px;"></div>
+	
+	<header class="error-title">
+		<div class="error-title-inner">
+			<h1>Ooops! :(</h1>
+			<?php
+				$file = $t->getFile() ?? null;
+				$reduceFile = str_replace(array("\\",$_SERVER['DOCUMENT_ROOT']), array("/",""), $file);
+				$line = $t->getLine() ?? null;
+				
+				print "Foi retornado uma exceção de: <span>..{$reduceFile}</span>, lnha: <span>{$line}</span>;";
+			?>
+			
+		</div>
+	</header>
+	
+	<h3><i class="<?= $iconException ?? null ?>"></i><?= $query ? "PDO" : "" ?>Exception: </h3>
+	
+	<section class="error-exception">
+		
+		<div class="error-exception-description">
+			<?php
+				$file = $t->getFile() ?? null;
+				$reduceFile = str_replace(array("\\",$_SERVER['DOCUMENT_ROOT']), array("/",""), $file);
+				$line = $t->getLine() ?? null;
+				
+				print "Foi retornado uma exceção de: <span>..{$reduceFile}</span>, 
+					   linha: <span>{$line}</span>; com a seguinte mensagem: ";
+			?>
+		</div>		
+		
+		<div class="error-exception-message">
+			<?= $t->getMessage() ?? null; ?>
+		</div>	
+		
+	</section>
+	
+	<h3>Stack Trace Route:</h3>
+		
+	<section class="error-trace">
+		<table class="tbl-error-trace">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Função</th>
+					<th>Local</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php 
+				$linha = "";
+				$rota = $t->getTrace() ?? null; 
+
+				for ($i=0; $i < count($rota) ; $i++) {
+					$linha .= "<tr>";
+					$args = "";
+					if(count($rota[$i]['args']) > 0){
+						for ($y=0; $y < count($rota[$i]['args']) ; $y++) {
+							if(is_string($rota[$i]['args'][$y])){
+								$args .= "<b>'".$rota[$i]['args'][$y]."'</b>, ";
+							}else{
+								if(is_array($rota[$i]['args'][$y])){
+									$strArr = " <b>array</b>( ".implode(",", $rota[$i]['args'][$y])." ) ";
+									$args .= $strArr;
+								}else{
+									$args .= $rota[$i]['args'][$y].", ";										
+								}
+							}
+						}
+					} 
+					$linha .= "<td>{$i}</td>";
+					$linha .= "<td>".$rota[$i]['class'].$rota[$i]['type'].$rota[$i]['function']."(".substr($args,0,-2).")</td>";
+					$local = $rota[$i]['file'].":".$rota[$i]['line'];
+					$linha .= "<td>..".substr($local, strrpos($local,"\\"))."</td>";
+					$linha .= "</tr>";
+				} 
+				print $linha;
+			?>
+			</tbody>
+		</table>
+		
+	</section>
+	
+	
+	<h3 class="<?= $showQuery ?>">Sql Query: </h3>
+	<section class="error-query <?= $showQuery ?>">
+		<?= $query ? AsindSqlFormatter::format($query) : null ?>
+	</section>
+
+	
+	<h3>AsindController: </h3>
+	<table class="error-controller">
+	<?php 
+		$permissoes = $controller->getLogin()->permissoes; sort($permissoes);
+		print 
+		"<tr>
+			<td class='info'>Login:</td>
+			<td>id:</td>
+			<td>{$controller->getLogin()->id}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>funcionarioId:</td>
+			<td>{$controller->getLogin()->funcionarioId}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>usuario:</td>
+			<td>{$controller->getLogin()->usuario}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>nome:</td>
+			<td>{$controller->getLogin()->nome}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>permissões:</td>
+			<td>".implode(', ',$permissoes)."</td>
+		</tr>
+		<tr>
+			<td class='info'>Database:</td>
+			<td>{$controller->getLogin()->db}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class='info'>System:</td>
+			<td>url:</td>
+			<td class='url'>{$controller->get_url()}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>controller:</td>
+			<td class='url'>{$controller->get_controller()}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>action:</td>
+			<td class='url'>{$controller->get_action()}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>params:</td>
+			<td class='url'>".implode(", \n",$controller->get_params())."</td>
+		</tr>
+		<tr>
+			<td class='info'>System in cache:</td>
+			<td>cache-url:</td>
+			<td>{$controller->get_cache()->_url}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>cache-controller:</td>
+			<td>{$controller->get_cache()->_controller}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>cache-action:</td>
+			<td>{$controller->get_cache()->_action}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>cache-params:</td>
+			<td>".implode(", \n",$controller->get_cache()->_params)."</td>
+		</tr>
+		";
+	?>
+	</table>
+
+
+
+</body>
+	
+	
+</html>

@@ -1,6 +1,6 @@
 <?php
 
-class Redirecionar{
+class Redirect{
 
     static function prepareUrl($url, $msg){
     	$redirect = $url."/msg/".$msg;
@@ -35,12 +35,12 @@ class Redirecionar{
     /**
      * Redirecionamento com 
      */
-    static function erro($url, $msg){
+    static function error($url, $msg){
     	$finalUrl = self::prepareUrl($url, $msg);
     	print "<script>location.href='".$finalUrl."#msg-erro'</script>";
     }
     
-    static function aviso($url, $msg){ 
+    static function warning($url, $msg){ 
     	$finalUrl = self::prepareUrl($url, $msg);
     	print "<script>location.href='".$finalUrl."#msg-warning'</script>";
     }
@@ -50,7 +50,7 @@ class Redirecionar{
     	print "<script>location.href='".$finalUrl."#msg-info'</script>";
     }
     
-    static function sucesso($url, $msg){
+    static function success($url, $msg){
     	$finalUrl = self::prepareUrl($url, $msg);
     	print "<script>location.href='".$finalUrl."#msg-success'</script>";
     }
@@ -59,14 +59,14 @@ class Redirecionar{
     /**
      * Redireciona o App para o url acessado anteriormente.
      */
-    static function urlAnterior(){
+    static function back(){
         print "<script>window.history.back(-1)</script>"; 	
     }	
     
     /**
      * Redireciona o App para o url acessado anteriormente.
      */
-    static function recarregar(){
+    static function reload(){
         print "<script>location.reload()</script>"; 	
     }
 	

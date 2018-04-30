@@ -3,11 +3,14 @@
 class Session {
 
     public function __construct() {
-        try {
+        
+    	try {
+    		
             session_start();
             $idUser = session_id();
-        } catch (Exception $t) {
-            print "Erro: " . $t->getMessage(); die();
+            
+        } catch (Throwable $t) {
+        	$error = new LightphantError($t, $this);
         }
     }
 

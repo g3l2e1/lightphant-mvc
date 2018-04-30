@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"> 
+	 
+<head>
+
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/x-icon" href="<?= URL_BASE . VIEWS; ?>lightphant-mvc-favicon.ico" />
+	<link rel="icon" type="image/x-png" href="<?= URL_BASE . VIEWS; ?>lightphant-mvc-favicon.png" />			 
+	
+	<!-- Incluir conteúdo da tag header -->	
+	<?php require_once( VIEWS . "lightphant-head.phtml" ); ?>
+	
+</head>	 
+
+<body>
+	  
+	<script>
+		//Variáveis globais para serem usadas por qualquer arquivo "*.js"
+		var MVC = <?= json_encode(get_defined_constants(true)['user']) ?? '{}' ?>;
+	</script> 
+	
+	<!-- Menu principal -->	
+	<?php require_once( VIEWS . "lightphant-menu-principal.phtml" ); ?>
+	
+	<section id="loading">
+		<div>
+			<img src="<?= URL_BASE . VIEWS; ?>img/loading-asa-sul.gif" />
+		</div>
+	</section>
+	 
+	<section id="cont">
+		<div class="compensacao-menu-principal-flutuante"></div> 
+		<?php require_once( VIEWS . $pagina . ".phtml" ); ?>
+	</section>	
+	
+	<section id="forms">
+		<?php require_once( VIEWS . "lightphant-login.phtml" ); ?>
+	</section>
+	
+	<section id="alerts">
+		<?php require_once( VIEWS . "lightphant-alertas.phtml" ); ?>
+	</section>
+
+</body>
+
+</html>

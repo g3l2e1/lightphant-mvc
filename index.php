@@ -9,7 +9,7 @@ require_once( 'lib/bin/Constants.php' );
 require_once( 'lib/config/Config.php' );
 
 //Autoload
-require_once( 'lib/bin/AutoLoad.php' );
+require_once( 'lib/bin/autoload.php' );
 
 //Funções extras para o php.
 require_once( 'lib/helpers/php_extends.php' );

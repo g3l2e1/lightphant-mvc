@@ -11,7 +11,15 @@ function is_assoc($arr) {
     return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
-function mask($val, $mask) {
+/**
+ * Aplica mascara a uma string
+ * Ex: mask('60340000', '##.###-###')
+ * Retornará 60.340-000
+ * @param string $val
+ * @param string $mask 
+ * @return string
+ */
+function mask(string $val, string $mask) {
     $maskared = '';
     $k = 0;
     for ($i = 0; $i <= strlen($mask) - 1; $i++) {
@@ -26,13 +34,24 @@ function mask($val, $mask) {
     return $maskared;
 }
 
+/**
+ * Remove todos os espaços em branco de uma string
+ * @param string $string
+ * @return string
+ */
 function trimAll($string = false) {
     if ($string) {
         return str_replace(array(" ", "\n", "\t", "\r", "\0", "\x0B"), array("", "", "", "", "", ""), $string);
     }
 }
 
-function formatNomePessoal($nome){
+/**
+ * Retorna todas as primeiras letras de cada nome em maiúscula e o restante
+ * em minúscula incluindo preposições junções de nomes.
+ * @param string $nome
+ * @return string
+ */
+function formatNomePessoal(string $nome){
     $minusculas = mb_strtolower($nome);
     $primeiraMaiuscula = ucwords($minusculas);
     
@@ -43,6 +62,12 @@ function formatNomePessoal($nome){
     return $nomeFormatado;
 }
 
+/**
+ * Codifica todos os valores de um objeto
+ * @param string $encode
+ * @param StdClass $obj
+ * @return StdClass
+ */
 function object_map($encode, &$obj) {
     if (is_object($obj)) {
         $objeto = (object) array();
@@ -74,6 +99,11 @@ function object_map($encode, &$obj) {
     return $objeto;
 }
 
+/**
+ * Gera json a partir de um objeto
+ * @param StdClass $obj
+ * @return mixed
+ */
 function json_encode_object($obj) {
     
     $retorno;
@@ -82,14 +112,7 @@ function json_encode_object($obj) {
         for ($i = 0; $i < count($obj); $i++) {
             if (is_array($obj[$i])) {
                 $retorno[] = json_encode_object($obj[$i]);
-            }
-            /* else if(is_object($obj[$i]))
-              {
-              foreach ($obj[$i] as $key => $value)
-              {
-              $retorno[] = json_encode(array($key => $value));
-              }
-              } */ else {
+            }else {
                 $retorno[] = json_encode($obj[$i]);
             }
         }
@@ -103,8 +126,8 @@ function json_encode_object($obj) {
 /**
  * Função para encodificar & (ê comercial) e ' (aspas simples) para ser decoficad
  * após passar pelo métogo $_GET não confundindo com seus limitadores de parâmetros.
- * @param type $str
- * @return type
+ * @param String $str
+ * @return String
  */
 function specialEncode($str){
     $find = array("&","'");
@@ -116,8 +139,8 @@ function specialEncode($str){
 /**
  * Função para decodificar & (ê comercial) e ' (aspas simples) para ser decoficad
  * após passar pelo métogo $_GET não confundindo com seus limitadores de parâmetros.
- * @param type $str
- * @return type
+ * @param String $str
+ * @return String
  */
 function specialDecode($str){
     $find = array("_ecomercial_","_aspassimples_");
@@ -126,27 +149,13 @@ function specialDecode($str){
     return $decStr; 
 }
 
-function csv_to_array($filename='', $delimiter=','){
-    
-    if(!file_exists($filename) || !is_readable($filename))
-        return FALSE;
 
-    $header = NULL;
-    $data = array();
-    if (($handle = fopen($filename, 'r')) !== FALSE)
-    {
-        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
-        {
-            if(!$header)
-                $header = $row;
-            else
-                $data[] = array_combine($header, $row);
-        }
-        fclose($handle);
-    }
-    return $data;
-}
 
+/**
+ * Remove espaços em branco de um array.
+ * @param array|string|int $input
+ * @return string|array
+ */
 function trim_array($input){
     if(!is_array($input)){
         return trim($input);
@@ -155,6 +164,39 @@ function trim_array($input){
     }            
 }
 
+/**
+ * Converte um arquivo csv em array
+ * @param string $filename
+ * @param string $delimiter
+ * @return array[]
+ */
+function csv_to_array($filename='', $delimiter=','){
+	
+	if(!file_exists($filename) || !is_readable($filename))
+		return FALSE;
+		
+		$header = NULL;
+		$data = array();
+		if (($handle = fopen($filename, 'r')) !== FALSE)
+		{
+			while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+			{
+				if(!$header)
+					$header = $row;
+					else
+						$data[] = array_combine($header, $row);
+			}
+			fclose($handle);
+		}
+		return $data;
+}
+
+/**
+ * Converte um arquivo csv para array de objetos
+ * @param string $filename
+ * @param string $delimiter
+ * @return StdClass[]
+ */
 function csv_to_object_array($filename='', $delimiter=','){
         
     if(!file_exists($filename) || !is_readable($filename))
@@ -175,7 +217,5 @@ function csv_to_object_array($filename='', $delimiter=','){
     }
     return $data;
 }
-
-?>
 
 
