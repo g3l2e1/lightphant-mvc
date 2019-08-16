@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of LightphantMvc
  *
@@ -47,8 +40,7 @@ class LightphantMvc {
    * Exemplo: localhost/meusite/index/boasvindas/ executará a função boasvindas() da class/controller index.
    */
   public function trumpet(){
-    try {
-    
+    try {    
     	//Verificar se existe rota e retornar controller e action equivalente
       $rota = new Rotas($this->controller, $this->action);
       $controller = $rota->getRotaClass();
@@ -60,7 +52,7 @@ class LightphantMvc {
       }
       
       //Comparar existência de arquivos
-      $sysController = $controller."Controller";
+      $sysController = substr($controller,-10) == 'Controller' ? $controller : $controller."Controller";
              
       $mvc = new $sysController();
       $mvc->$sysAction();

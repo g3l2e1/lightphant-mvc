@@ -4,10 +4,11 @@
 	 
 <head>
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" type="image/x-icon" href="app/views/lightphant-mvc-favicon.ico" />
-	<link rel="icon" type="image/x-png" href="app/views/lightphant-mvc-favicon.png" />
+	<link rel="shortcut icon" type="image/x-icon" href="lib/vendor/favicon.ico" />
+	<link rel="icon" type="image/x-png" href="lib/vendor/favicon.png" />
 
 	<title>LightphantMvc</title>
+
 </head>	 
 
 <body>
@@ -15,27 +16,40 @@
 	<script>
 		//Variáveis globais para serem usadas por qualquer arquivo "*.js"
 		var MVC = <?= json_encode(get_defined_constants(true)['user']) ?? '{}' ?>;
-	</script> 
+	</script>
+
+	<style>
+		@font-face { font-family:'Rokkitt'; font-style: normal; 
+		src: url('lib/vendor/Rokkitt-Regular.ttf') format("truetype");	}
 	
-	<!-- Menu principal -->	
-	<?php //require_once( 'app/views/lightphant-menu-principal.phtml' ); ?>
-	
-	<section id="loading">
-		<div>
-			<img src='app/views/img/loading-asa-sul.gif' />
-		</div>
-	</section>
+		* { font-family:'Rokkitt', monospace; word-wrap: break-word;  }
+
+		body { 
+			background-color: #efefef; line-height: 1.2;
+			padding: 0; margin: 0; font-size: 1.2em; color: royalblue;
+		}
+
+		#cont { margin: 2em; }
+		#cont hr { border-top-color: royalblue; }
+		.bemvindo { background-color: royalblue; color: #fff; }
+	</style>
 	 
 	<section id="cont">
-		<?php require_once( "app/views/{$pagina}.phtml" ); ?>
-	</section>	
-	
-	<section id="forms">
-		<?php //require_once( 'app/views/lightphant-login.phtml' ); ?>
-	</section>
-	
-	<section id="alerts">
-		<?php //require_once( 'app/views/lightphant-alertas.phtml' ); ?>
+		<h1>Bemvindo ao LightphantMvc!</h1>
+		<p>
+			Lightphant MVC é um framework Model, View, Control ideal para projetos rápidos e leves.
+			<br>
+			Para quando você dispensar a robustez dos mais conhecidos frameworks PHP sem abrir mão da organização MVC. 
+			<hr>			
+		</p>
+		<h3># Model Builder</h3>
+		<p>
+			O Model Builder é um construtor de models via linha de comando usando php-cli.<br>
+			Comandos:
+			<ul>
+				<li>php -c lib\helpers\cli-mode\php-cli.ini -d display-errors php-builder.php</li>
+			</ul>
+		</p>
 	</section>
 
 </body>

@@ -36,5 +36,5 @@ define('LP_STRUCTURE', serialize([
  * Ativa/desativar modo de depuração desenvolvedor
  */
 define('LP_ROUTES', serialize([
-	'IndexController/initial' => ''
+	'Index/initial' => ''
 ]));
