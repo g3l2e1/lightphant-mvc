@@ -12,9 +12,8 @@ class Rotas {
   private $rotaMetodo;
 
   public function __construct(string $controller, string $action){
-    $this->rotas = unserialize(LP_ROUTES);
-    $this->rotas['LightphantController/initial'] = 'lightphant-welcome';
-    $this->rotas['LightphantController/builders'] = 'lightphant-builder';
+    $this->rotas['LPController/initial'] = 'lightphant-welcome';
+    $this->rotas['LPController/builders'] = 'lightphant-builder';
 
     $this->setRota($controller, $action);
   }

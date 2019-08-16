@@ -42,8 +42,8 @@ final class LightphantError extends Exception{
 	}
 
 	private function errorView($pagina, $t, $controller){  		
-		if( file_exists( "app/views/{$pagina}.phtml" ) ){
-			require_once( "app/views/{$pagina}.phtml" );				
+		if( file_exists( "lib/vendor/{$pagina}.phtml" ) ){
+			require_once( "lib/vendor/{$pagina}.phtml" );				
 		}
 	}
 }

@@ -6,6 +6,8 @@
  */
 class Controller extends LightphantMvc {
 	
+	private $userException;
+
 	/** 
 	 * Controller principal.
 	 * Todo controller deve estendê-lo. * 
@@ -31,6 +33,14 @@ class Controller extends LightphantMvc {
 		} catch (Throwable $t) {
 			$error = new LightphantError($t, $this);
 		}
+	}
+ 
+	public function getUserException(){
+		return $this->userException;
+	}
+ 
+	public function setUserException($userException){
+		$this->userException = $userException;
 	}
 }
 

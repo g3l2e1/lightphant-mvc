@@ -11,7 +11,8 @@ define('URL_BASE', '/');
 define('LP_DEBUG', true);
 
 /**
- * Ativa/desativar modo de depuração desenvolvedor
+ * Estruturas do projeto usadas no autload.
+ * Se criar uma estrutura nova que tenha objetos a instanciar acrescente aqui.
  */
 define('LP_STRUCTURE', serialize([
 	'/',
@@ -29,4 +30,11 @@ define('LP_STRUCTURE', serialize([
 	'lib/',
 	'lib/config/',
 	'lib/helpers/'
+]));
+
+/**
+ * Ativa/desativar modo de depuração desenvolvedor
+ */
+define('LP_ROUTES', serialize([
+	'IndexController/initial' => ''
 ]));
