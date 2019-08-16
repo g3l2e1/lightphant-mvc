@@ -5,11 +5,11 @@
 <head>
 
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" type="image/x-icon" href="<?= URL_BASE . VIEWS; ?>lightphant-mvc-favicon.ico" />
-	<link rel="icon" type="image/x-png" href="<?= URL_BASE . VIEWS; ?>lightphant-mvc-favicon.png" />			 
+	<link rel="shortcut icon" type="image/x-icon" href="app/views/lightphant-mvc-favicon.ico" />
+	<link rel="icon" type="image/x-png" href="app/views/lightphant-mvc-favicon.png" />			 
 	
 	<!-- Incluir conteúdo da tag header -->	
-	<?php require_once( VIEWS . "lightphant-head.phtml" ); ?>
+	<?php require_once( 'app/views/lightphant-head.phtml' ); ?>
 	
 </head>	 
 
@@ -21,25 +21,25 @@
 	</script> 
 	
 	<!-- Menu principal -->	
-	<?php require_once( VIEWS . "lightphant-menu-principal.phtml" ); ?>
+	<?php //require_once( 'app/views/lightphant-menu-principal.phtml' ); ?>
 	
 	<section id="loading">
 		<div>
-			<img src="<?= URL_BASE . VIEWS; ?>img/loading-asa-sul.gif" />
+			<img src='app/views/img/loading-asa-sul.gif' />
 		</div>
 	</section>
 	 
 	<section id="cont">
 		<div class="compensacao-menu-principal-flutuante"></div> 
-		<?php require_once( VIEWS . $pagina . ".phtml" ); ?>
+		<?php require_once( "app/views/{$pagina}.phtml" ); ?>
 	</section>	
 	
 	<section id="forms">
-		<?php require_once( VIEWS . "lightphant-login.phtml" ); ?>
+		<?php //require_once( 'app/views/lightphant-login.phtml' ); ?>
 	</section>
 	
 	<section id="alerts">
-		<?php require_once( VIEWS . "lightphant-alertas.phtml" ); ?>
+		<?php //require_once( 'app/views/lightphant-alertas.phtml' ); ?>
 	</section>
 
 </body>

@@ -12,10 +12,8 @@ class IndexController extends Controller {
 		parent::__construct ();
 	}
 	
-	public function initial(){
-		
-		$params = [];
-		
+	public function initial(){		
+		$params = [];		
 		$this->view('lightphant-index', $params);		
 	}
 }
