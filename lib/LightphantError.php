@@ -1,6 +1,6 @@
 <?php
 
-final class LightphantError extends Exception{
+final class LightphantError extends Exception {
 
 	public function __construct(Throwable $t, Controller $controller){
 
@@ -42,8 +42,8 @@ final class LightphantError extends Exception{
 	}
 
 	private function errorView($pagina, $t, $controller){  		
-		if( file_exists( "lib/vendor/{$pagina}.phtml" ) ){
-			require_once( "lib/vendor/{$pagina}.phtml" );				
+		if( file_exists( "/lib/vendor/{$pagina}.phtml" ) ){
+			require_once( "/lib/vendor/{$pagina}.phtml" );				
 		}
 	}
 }

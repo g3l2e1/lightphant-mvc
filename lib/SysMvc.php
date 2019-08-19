@@ -78,7 +78,7 @@ class SysMvc {
 		$queryParams=[];
 		parse_str($uriParametros, $queryParams);
 		//Pegar parâmetros se passados via POST
-		$queryParams = @$SERVER ['REQUEST_METHOD'] == 'POST' ? $POST : $queryParams;
+		$queryParams = @$_SERVER['REQUEST_METHOD'] == 'POST' ? $_POST : $queryParams;
 		
 		//Mesclar parametros de caminho com parâmetros da query
 		$this->params = array_merge($pathParams, $queryParams);

@@ -1,28 +1,29 @@
 <?php
 
-abstract class Conexao {
+class Conexao {
 
-  private $con;
+  static $con;
 
-  public function __constructor(
+  static function con(
       $serverHostName, $attachDBFileName, $database, $user, $pass
   ){
     $local = 
-        "sqlsrv:Server={$serverHostName}; 
-         AttachDBFileName={$attachDBFileName}; 
-         Database={$database}; 
-         ConnectionPooling=0";
+      "sqlsrv:Server={$serverHostName}; 
+       AttachDBFileName={$attachDBFileName}; 
+       Database={$database}; 
+       ConnectionPooling=0";
 
-    if($this->con != null){ return $con; }
+    if(self::$con != null){ return self::$con; }
 
-    $this->con = new PDO($local, $user, $pass);
-    $this->con->setAttribute(PDO::SQLSRV_ATTR_DIRECT_QUERY, true);
-    $this->con->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
-    $this->con->setAttribute(PDO::SQLSRV_ATTR_ENCODING, PDO::SQLSRV_ENCODING_UTF8);
-    $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-    $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    self::$con = new PDO($local, $user, $pass);
+    self::$con->nextRow = false;
+    self::$con->setAttribute(PDO::SQLSRV_ATTR_DIRECT_QUERY, true);
+    self::$con->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
+    self::$con->setAttribute(PDO::SQLSRV_ATTR_ENCODING, PDO::SQLSRV_ENCODING_UTF8);
+    self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    self::$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    return $this->con;
+    return self::$con;
   }
 
 }
